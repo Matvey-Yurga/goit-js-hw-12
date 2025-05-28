@@ -1,18 +1,119 @@
-/**
-  |============================
-  | include css partials with
-  | default @import url()
-  |============================
-*/
-/* Common styles */
-@import url('./reset.css');
-@import url('./base.css');
-@import url('./container.css');
-@import url('./animations.css');
+ul {
+  list-style-type: none;
+}
 
-/* Sections style */
-@import url('./header.css');
-@import url('./vite-promo.css');
-@import url('./badges.css');
-@import url('./back-link.css');
-@import url('./footer.css');
+
+.form {
+  margin: 0 auto;
+  margin-top: 36px;
+}
+
+input[name="search-text"] {
+  border-radius: 4px;
+  width: 272px;
+  height: 40px;
+  background-color: #fff;
+  border-color: #808080;
+  border-style: solid;
+  border-width: 1px;
+  padding: 8px 16px;
+  margin-bottom: 16px auto;
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-width: 100vw;
+  min-height: 100vh;
+  padding: 16px 24px;
+  margin: 0 auto;
+}
+
+img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+
+.gallery {
+  max-width: 1128px;
+  margin: 0 auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.info b {
+  font-weight: 600;
+
+  line-height: 1.33;
+  letter-spacing: 0.04em;
+}
+button[type="submit"],
+.loadMoreBtn {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background-color: #4e75ff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.loadMoreBtn {
+  width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+.loader1{
+  display: flex;
+  justify-content: center;
+}
+.loader {
+  display: inline-block;
+
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: #FF3D00;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.hidden {
+  display: none;
+};
