@@ -14,14 +14,14 @@ form.addEventListener("submit", async (e) => {
     currentQuery = e.target.elements['search-text'].value.trim()
     if (!currentQuery) return;
     currentPage = 1;
-    showLoadMoreButton()
     clearGallery()
+    hideLoadMoreButton();
     showLoader()
 try {
     const res = await getImagesByQuery(currentQuery, currentPage);
     totalHits = res.totalHits
-    createGallery(res.hits);
     hideLoader();
+    
     if (res.hits.length === 0) {
         iziToast.warning({
                 message: "Sorry, there are no images matching your search query. Please try again!",
@@ -29,20 +29,19 @@ try {
         })
         return;
     }
+    createGallery(res.hits);
     const totalPages = Math.ceil(totalHits / perPage)
-    if (currentPage >= totalPages) {
-        hideLoadMoreButton();
-    } else {
-        showLoadMoreButton();
-    }
+if (currentPage < totalPages) {
+    showLoadMoreButton(); 
+  }
 } catch (error) {
-    console.error(error);
-    hideLoader();
-        iziToast.error({
-            message: 'Something went wrong. Please try again later.',
-            position: 'topRight', })
+  console.error(error);
+  hideLoader();
+  iziToast.error({
+    message: 'Something went wrong. Please try again later.',
+    position: 'topRight',
+  });
 }
-
 });
 loadMoreBtn.addEventListener("click", async (e) => {
     currentPage += 1
@@ -53,17 +52,20 @@ loadMoreBtn.addEventListener("click", async (e) => {
         createGallery(res.hits);
          scrollPage();
         const totalPages = Math.ceil(totalHits / perPage);
-        if (currentPage >= totalPages) {
-          iziToast.info({
-            message: "We're sorry, but you've reached the end of search results.",
-            position: 'topRight',
-          });
-          hideLoadMoreButton();
-        }
-    } catch (error) {
-      console.error(error);
-      iziToast.error({ message: 'Something went wrong while loading more images.', position: 'topRight' });
-    }
+if (currentPage >= totalPages) {
+    iziToast.info({
+      message: "We're sorry, but you've reached the end of search results.",
+      position: 'topRight',
+    });
+    hideLoadMoreButton();
+  }
+} catch (error) {
+  console.error(error);
+  iziToast.error({
+    message: 'Something went wrong while loading more images.',
+    position: 'topRight',
+  });
+}
 });
   
 function scrollPage() {
